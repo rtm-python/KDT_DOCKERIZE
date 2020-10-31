@@ -1,0 +1,16 @@
+FROM centos:8
+
+# INSTALLATION
+RUN yum -y update \
+	&& dnf install -y java-11-openjdk-devel \
+	&& rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch \
+	&& printf "[elasticsearch-7.x]\nname=Elasticsearch repository for 7.x packages\nbaseurl=https://artifacts.elastic.co/packages/7.x/yum\nenabled=1\ngpgcheck=1\ngpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch\nautorefresh=1\ntype=rpm-md" > /etc/yum.repos.d/elasticsearch.repo \
+	&& dnf install -y elasticsearch \
+	&& yum clean all \
+	&& rm -rf /var/cache/yum
+
+# STARTING
+USER elasticsearch
+WORKDIR /usr/share/elasticsearch/bin
+EXPOSE 9200
+CMD [ "./elasticsearch" ]

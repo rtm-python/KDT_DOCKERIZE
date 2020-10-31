@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile/api
+      args:
+        - "VENV_USER=csv2neo4j"
+        - "VENV_PATH=/opt/csv2neo4j/venv"
+      network: host
+    network_mode: host
+    ports:
+      - "8000:8000"
+    environment:
+      - NEO4J_DATABASE_FILE=/run/secrets/neo4j_database
+      - NEO4J_USER_FILE=/run/secrets/neo4j_user
+      - NEO4J_PASSWORD_FILE=/run/secrets/neo4j_password
+    secrets:
+      - neo4j_database
+      - neo4j_user
+      - neo4j_password
+
+  neo4j:
+    build:
+      context: .
+      dockerfile: Dockerfile/neo4j
+      network: host
+    network_mode: host
+    ports:
+      - "7474:7474"
+    environment:
+      - NEO4J_dbms_default__listen__address=0.0.0.0
+
+  elastic:
+    build:
+      context: .
+      dockerfile: Dockerfile/elasticsearch
+      network: host
+    network_mode: host
+    ports:
+      - "9200:9200"
+
+secrets:
+  neo4j_database:
+    file: secrets/neo4j_database.txt
+  neo4j_user:
+    file: secrets/neo4j_user.txt
+  neo4j_password:
+    file: secrets/neo4j_password.txt

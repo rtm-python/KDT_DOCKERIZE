@@ -1,0 +1,51 @@
+FROM centos:8 AS builder
+
+# BUILD ARGUMENTS
+ARG VENV_USER=csv2neo4j
+ARG VENV_PATH=/opt/$VENV_USER/venv
+
+# INSTALATION
+RUN yum -y update \
+	&& yum install -y \
+	git \
+	python36 \
+	&& yum clean all \
+	&& rm -rf /var/cache/yum \
+	&& useradd $VENV_USER -s /bin/bash \
+	&& mkdir /opt/$VENV_USER \
+	&& chown $VENV_USER:$VENV_USER /opt/$VENV_USER
+
+# CLONING CODE AND CREATING VIRTUAL ENVIRONMENT
+USER $VENV_USER
+ENV PATH="$VENV_PATH/bin:$PATH"
+
+WORKDIR /opt/$VENV_USER
+RUN git clone https://github.com/rtm-python/KDT_CSV2NEO4J.git \
+	&& python3 -m venv $VENV_PATH
+
+WORKDIR /opt/$VENV_USER/KDT_CSV2NEO4J
+RUN pip install --upgrade pip \
+	&& pip install  -r requirements.txt
+
+
+FROM centos:8
+
+# BUILD ARGUMENTS
+ARG VENV_USER=csv2neo4j
+ARG VENV_PATH=/opt/$VENV_USER/venv
+
+# COPYING CLONED CODE AND CREATED VIRTUAL ENVIRONMENT 
+ENV PATH="$VENV_PATH/bin:$PATH"
+COPY --from=builder /opt/$VENV_USER /opt/$VENV_USER
+COPY --from=builder /usr/bin /usr/bin
+COPY --from=builder /etc/alternatives /etc/alternatives
+
+RUN useradd $VENV_USER -s /bin/bash \
+	&& chown $VENV_USER:$VENV_USER /opt/$VENV_USER
+
+# STARTING
+USER $VENV_USER
+WORKDIR /opt/$VENV_USER/KDT_CSV2NEO4J
+
+EXPOSE 8000
+CMD [ "uvicorn", "run:app" ]
