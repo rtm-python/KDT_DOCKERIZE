@@ -8,7 +8,7 @@ _Dockerize python application with Neo4j-database and ElasticSearch_
 * [docker-compose](https://docs.docker.com/compose/)
 
 
-## UNRESOLVED ISSUE
+## UNRESOLVED ISSUES
 
 * Not solved Docker networking in Linux environment, have no elegant solution for service name resolving, for example, http://neo4j:7474/db/data to connect to Neo4j-database (each service bind to 0.0.0.0)
 _Currently all services connects to host network, so all services should bind to localhost_
