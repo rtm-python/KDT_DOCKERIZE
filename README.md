@@ -18,27 +18,23 @@ _Currently configuration file copied to the image (Linux based)_
 
 ## IMPLEMENTATION
 
-* /Dockerfile
-*	/api (Dockerfile for python-script image)
-*	/neo4j (Dockerfile for Neo4j-database image)
-*	/elasticsearch (Dockerfile for ElasticSearch image)
+* /Dockerfile/api (Dockerfile for python-script image)
+* /Dockerfile/neo4j (Dockerfile for Neo4j-database image)
+* /Dockerfile/elasticsearch (Dockerfile for ElasticSearch image)
 
-* /scripts
-*	/api.sh (build and interactively run python-script)
-*	/neo4j.sh (build and interactively run Neo4j-database)
-*	/elasticsearch.sh (build and interactively run ElasticSearch)
-*	/prune.sh (remove all containers and all images)
-*	/secrets.sh (create secrets folder and secret files)
-*	/container_ip.sh (show containers ip addresses)
+* /scripts/api.sh (build and interactively run python-script)
+* /scripts/neo4j.sh (build and interactively run Neo4j-database)
+* /scripts/elasticsearch.sh (build and interactively run ElasticSearch)
+* /scripts/prune.sh (remove all containers and all images)
+* /scripts/secrets.sh (create secrets folder and secret files)
+* /scripts/container_ip.sh (show containers ip addresses)
 
-* /secrets
-*	/neo4j_uri.txt (URI to connect to Neo4j-database)
-*	/neo4j_user.txt (username to connect to Neo4j-database)
-*	/neo4j_password.txt (password to connect to Neo4j-database)
-*	/elastic_uri.txt (URI to connect to ElasticSearch)
+* /secrets/neo4j_uri.txt (URI to connect to Neo4j-database)
+* /secrets/neo4j_user.txt (username to connect to Neo4j-database)
+* /secrets/neo4j_password.txt (password to connect to Neo4j-database)
+* /secrets/elastic_uri.txt (URI to connect to ElasticSearch)
 
-* /conf
-*	/neo4j.conf (configuration file to copy)
+* /conf/neo4j.conf (configuration file to copy)
 
 * /docker-compose.yml
 
