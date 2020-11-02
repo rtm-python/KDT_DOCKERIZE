@@ -13,4 +13,4 @@ RUN yum -y update \
 USER elasticsearch
 WORKDIR /usr/share/elasticsearch/bin
 EXPOSE 9200
-CMD [ "./elasticsearch" ]
+CMD [ "./elasticsearch", "-E", "http.host=0.0.0.0", "-E", "http.bind_host=0.0.0.0", "-E", "http.publish_host=0.0.0.0" ]

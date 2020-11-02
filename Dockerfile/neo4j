@@ -9,9 +9,17 @@ RUN yum -y update \
 	&& yum clean all \
 	&& rm -rf /var/cache/yum
 
+# CONFIGURATION
+# There are some unresolved issue with passing configuration
+# using environments, so I've just copying conf-file to image.
+# More proper way is to mount volume with conf-file.
+WORKDIR /etc/neo4j
+COPY conf/neo4j.conf neo4j.conf
+
 #STARTING
 USER neo4j
 WORKDIR /usr/bin
 
 EXPOSE 7474
+EXPOSE 7687
 CMD [ "./neo4j", "console" ]

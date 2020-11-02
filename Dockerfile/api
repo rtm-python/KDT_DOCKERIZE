@@ -48,4 +48,4 @@ USER $VENV_USER
 WORKDIR /opt/$VENV_USER/KDT_CSV2NEO4J
 
 EXPOSE 8000
-CMD [ "uvicorn", "run:app" ]
+CMD [ "uvicorn", "--host", "0.0.0.0", "run:app" ]
