@@ -18,32 +18,29 @@ _Currently configuration file copied to the image (Linux based)_
 
 ## IMPLEMENTATION
 
-### FILES
+* /Dockerfile
+*	/api (Dockerfile for python-script image)
+*	/neo4j (Dockerfile for Neo4j-database image)
+*	/elasticsearch (Dockerfile for ElasticSearch image)
 
-.
-|-/Dockerfile
-|	|-/api 				(Dockerfile for python-script image)
-|	|-/neo4j 			(Dockerfile for Neo4j-database image)
-|	|-/elasticsearch	(Dockerfile for ElasticSearch image)
-|
-|-/scripts
-|	|-/api.sh			(build and interactively run python-script)
-|	|-/neo4j.sh			(build and interactively run Neo4j-database)
-|	|-/elasticsearch.sh	(build and interactively run ElasticSearch)
-|	|-/prune.sh			(remove all containers and all images)
-|	|-/secrets.sh		(create secrets folder and secret files)
-|	|-/container_ip.sh	(show containers ip addresses)
-|
-|-/secrets
-|	|-/neo4j_uri.txt		(URI to connect to Neo4j-database)
-|	|-/neo4j_user.txt		(username to connect to Neo4j-database)
-|	|-/neo4j_password.txt	(password to connect to Neo4j-database)
-|	|-/elastic_uri.txt		(URI to connect to ElasticSearch)
-|
-|-/conf
-|	|-/neo4j.conf		(configuration file to copy)
-|
-|-/docker-compose.yml
+* /scripts
+*	/api.sh (build and interactively run python-script)
+*	/neo4j.sh (build and interactively run Neo4j-database)
+*	/elasticsearch.sh (build and interactively run ElasticSearch)
+*	/prune.sh (remove all containers and all images)
+*	/secrets.sh (create secrets folder and secret files)
+*	/container_ip.sh (show containers ip addresses)
+
+* /secrets
+*	/neo4j_uri.txt (URI to connect to Neo4j-database)
+*	/neo4j_user.txt (username to connect to Neo4j-database)
+*	/neo4j_password.txt (password to connect to Neo4j-database)
+*	/elastic_uri.txt (URI to connect to ElasticSearch)
+
+* /conf
+*	/neo4j.conf (configuration file to copy)
+
+* /docker-compose.yml
 
 
 All images based on centos:8 image.
